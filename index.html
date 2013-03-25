@@ -12,15 +12,15 @@
       //Here is what you start with.  You have a function that when you call it and give it a message, it will 'render' or draw the message onto the page using a template.  The template part of the function is the html that is the same for all messages.  Let's break this function down:
       var renderSomethingOnThePage = function(message){
         //we are going to be using jquery to append a message to the page, but we dont want all this HTML to be in the '.append' function call, so we break it out into a variable called $element first. Then we just call the '.append' method with that variable.  This also allows us to space out the html like you would expect to see it - a tree structure. 
-        var element = "<div>" +
-                        "<span>" + message + "</span>" +
-                      "</div>" +
-                      "<br/>";
+        var html = "<div>" +
+                     "<span>" + message + "</span>" +
+                   "</div>" +
+                   "<br/>";
 
         //Question:  How would you modify the above template to add style to the look of the page?  Look below for an example (answer 1)
 
         //here is the actual jquery call to append the html defined above to the body of the page.  For each time this function is called, the whole template defined above will be 'rendered' with the message you define in the function argument.
-        $('body').append(element);
+        $('body').append(html);
       };
  
       //let's try it out!
@@ -39,20 +39,20 @@
           //this is the code that will get run.  Notice that we are calling 'this.on()', this call is basically the same as the way we did it in the previous exercise, however, by putting it into the initialize function, we can be sure that all models that are created will have event listeners on them.
 
           //OK, so now it is your turn to write a '.on' method call.  We want to make an event listener that will listen for a 'change' in this model.  We want to call the method we defined above ('renderSomethingOnThePage') and pass the message attribute on the model as an argument.  Give it a shot, or check out how the function was defined on the previous exercise.   
-          this.on();
+          this.on(/* try adding an event handler here */);
         },
 
         //the second method is just some method that we thought might be useful for this message.  We think that in the future we will need to be able to alert the message on our model and want to be able to call this function, so we define it on the model.  
         alertThisMessage: function(){
           //note the object within any model is a spot you will frequently be storing information about a model in.
-          alert(this.attributes.message);
+          alert(this.get('message'));
         }
       });
       //how would you call the second method?  Give it a shot.  Check out the answer below (answer 2.)
 
 
       //now to give it a whirl, we 'instantiate' an instance of the class we have defined above:
-      var myNewMessage = new Message;
+      var myNewMessage = new Message();
 
       //and then we make a change on that model
       myNewMessage.set({message: 'someMessage'});
